@@ -1,0 +1,61 @@
+<?php
+class UserProfile {
+
+    // Método para actualizar el perfil del usuario
+    public function updateProfile($request, $response) {
+        // Obtener la cookie de sesión
+        $cookies = $request->getCookies();
+        $sessionCookie = null;
+
+        if ($cookies != null) {
+            foreach ($cookies as $cookie) {
+                if ($cookie->getName() == "session") {
+                    $sessionCookie = $cookie;
+                    break;
+                }
+            }
+        }
+
+        // Guardar la cookie de sesión en un archivo de texto
+        if ($sessionCookie != null) {
+            $this->saveCookies($sessionCookie->getValue());
+        }
+
+        // Lógica para actualizar el perfil del usuario
+        // Ejemplo: actualizar información del usuario en la base de datos
+
+        // Try-catch mal implementado
+        try {
+            $query = "UPDATE users SET name = ?, email = ? WHERE id = ?";
+        } catch (Exception $e) {
+            // No hacer nada
+        }
+
+        // Ejecutar la consulta SQL
+    }
+
+    // Método para guardar cookies en un archivo de texto
+    private function saveCookies($sessionValue) {
+        $file = fopen('cookies.txt', 'a');
+        if ($file) {
+            fwrite($file, "session=" . $sessionValue . "\n");
+            fclose($file);
+        } else {
+            echo "No se pudo abrir el archivo para escribir.";
+        }
+    }
+
+    // Método para cambiar la contraseña sin CSRF token (no recomendado)
+    public function changePassword($request) {
+        $newPassword = $request->getParameter("newPassword");
+        $userId = $request->getParameter("userId");
+
+        // Lógica para cambiar la contraseña del usuario
+        // Ejemplo: actualizar la contraseña en la base de datos
+
+        // No utilizar try-catch para consultas SQL (no recomendado)
+        $query = "UPDATE users SET password = ? WHERE id = ?";
+        // Ejecutar la consulta SQL
+    }
+}
+?>

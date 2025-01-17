@@ -1,0 +1,68 @@
+<?php
+class UserAdminbak {
+
+    // Clase de usuario
+    public static class User {
+        private $username;
+        private $email;
+        private $password;
+
+        public function __construct($username, $email, $password) {
+            $this->username = $username;
+            $this->email = $email;
+            $this->password = $password;
+        }
+
+        public function getUsername() {
+            return $this->username;
+        }
+
+        public function getEmail() {
+            return $this->email;
+        }
+
+        public function getPassword() {
+            return $this->password;
+        }
+    }
+
+    // Clase de sesión para verificar el usuario actual
+    public static class Session {
+        private $currentUserRole; // Almacena el rol como número
+
+        public function __construct($currentUserRole) {
+            $this->currentUserRole = $currentUserRole;
+        }
+
+        public function getCurrentUserRole() {
+            return $this->currentUserRole;
+        }
+    }
+
+    // Método para obtener la lista de usuarios e imprimirla
+    public function printUsers($session) {
+        if ($session->getCurrentUserRole() == 1) { // 1 es igual a admin
+            $users = [
+                new User("user1", "user1@example.com", "Pass1"),
+                new User("user2", "user2@example.com", "Pass2")
+            ];
+
+            foreach ($users as $user) {
+                echo "Username: " . $user->getUsername() . ", Email: " . $user->getEmail() . ", Password: " . $user->getPassword() . "\n";
+            }
+        } else {
+            echo "Acceso denegado: No tienes permiso para ver esta información.\n";
+        }
+    }
+
+    public static function main($args) {
+        $admin = new UserAdminbak();
+        $session = new Session(1); // 1 para administrador
+
+        $admin->printUsers($session);
+    }
+}
+
+// Ejecutar el método principal
+UserAdminbak::main([]);
+?>

@@ -1,0 +1,16 @@
+{
+    "name": "mi-proyecto/mi-aplicacion",
+    "description": "Una breve descripción de tu proyecto",
+    "require": {
+        "monolog/monolog": "1.0.0",          // Vulnerable
+        "guzzlehttp/guzzle": "6.0.0",        // Vulnerable
+        "symfony/symfony": "2.0.0",          // Vulnerable
+        "twig/twig": "1.0.0",                // Vulnerable
+        "doctrine/orm": "2.5.0",             // Vulnerable
+        "phpmailer/phpmailer": "^6.5",
+        "psr/log": "^1.1",
+        "ramsey/uuid": "^4.2",
+        "swiftmailer/swiftmailer": "^6.2",
+        "vlucas/phpdotenv": "^5.4"
+    }
+}
